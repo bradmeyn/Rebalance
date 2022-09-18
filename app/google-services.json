@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "773913669694",
+    "project_id": "rebalance-cc417",
+    "storage_bucket": "rebalance-cc417.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773913669694:android:05a84599215dbb9c92a16f",
+        "android_client_info": {
+          "package_name": "com.example.rebalance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773913669694-t51no57mp1hg748kjv7l9ufb04411c95.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rebalance",
+            "certificate_hash": "28429092c3509303f65281132a0db3e65bcbbbb9"
+          }
+        },
+        {
+          "client_id": "773913669694-q14iiiineevhs6v3l3hjvthd0e8qbcud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCf_nH-eTLUgtvqStXeFwT7e-ZBWIlL1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773913669694-q14iiiineevhs6v3l3hjvthd0e8qbcud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
