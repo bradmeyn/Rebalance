@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".add_investment">
+
+    <!-- PASSWORD    -->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/investmentLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginHorizontal="20dp"
+
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/investmentInput"
+            android:layout_width="match_parent"
+
+            android:layout_height="50dp"
+            android:hint="Investment" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/unitsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/investmentLayout" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/unitsInput"
+            android:hint="Units"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- PASSWORD    -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/priceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/unitsLayout" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/priceInput"
+            android:hint="average price ($)"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- TARGET    -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/targetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceLayout" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/targetInput"
+            android:hint="Target (%)"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Add Holding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/targetLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
