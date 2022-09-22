@@ -1,9 +1,11 @@
 package com.example.rebalance
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -13,26 +15,74 @@ import androidx.annotation.DrawableRes
 import com.example.rebalance.databinding.ActivityRegisterBinding
 import com.google.android.material.textfield.TextInputEditText
 
-//import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.ktx.Firebase
+
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 
-//    private lateinit var auth: FirebaseAuth
+
+
+        // Initialize Firebase Auth
+        private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        // Initialise Firebase Auth
-//        auth = Firebase.auth
-//        val registerBtn = findViewById<Button>(R.id.registerBtn)
-//        val nameInput = findViewById<TextInputEditText>(R.id.nameInput)
+        auth = Firebase.auth
 
         binding.registerBtn.setOnClickListener {
-            isValidForm()
+            var validRegistration = true
+            validRegistration = isValidForm()
+
+            if(validRegistration){
+                var email = binding.emailInput.text.toString()
+                var password = binding.passwordInput.text.toString()
+                var username = binding.nameInput.text.toString()
+                println("user is valid")
+
+                //Create an instance & create a new user
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this)
+                { task ->
+                    // Sign in success, update UI with the signed-in user's information
+
+
+                    //if registration is successful
+                    if(task.isSuccessful){
+                        println("user is created")
+                        Log.d(TAG, "createUserWithEmail:success")
+                        val user = auth.currentUser
+                        val nameUpdate = userProfileChangeRequest {
+                            displayName = username
+                        }
+                        user!!.updateProfile(nameUpdate).addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Log.d(TAG, "Name added to profile.")
+                            }
+                        }
+                        Toast.makeText(
+                            this@RegisterActivity,
+                            "Registration has been successful",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(baseContext, "Account creation failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
 
 //        Navigate to login screen
@@ -41,7 +91,6 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-
 
     }
 
@@ -77,7 +126,6 @@ class RegisterActivity : AppCompatActivity() {
         // check name meets requirements
 
         // check email format
-
         if(!binding.emailInput.text.toString().matches(Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$"))){
             binding.emailInput.setError("Invalid email format")
             validInputs = false
