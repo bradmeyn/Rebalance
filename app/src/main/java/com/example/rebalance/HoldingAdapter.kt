@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.view.menu.MenuView
 
-class HoldingAdapter(private val investments: List<Investment>) : RecyclerView.Adapter<HoldingAdapter.HoldingViewHolder>() {
+class HoldingAdapter(private val investments: List<Holding>) : RecyclerView.Adapter<HoldingAdapter.HoldingViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoldingViewHolder {
 
@@ -24,7 +24,7 @@ class HoldingAdapter(private val investments: List<Investment>) : RecyclerView.A
 
         holder.invName.text = currentItem.name
         holder.invCode.text = currentItem.code
-        holder.invPrice.text = "$"+ currentItem.price.toString()
+        holder.invPrice.text = "$"+ currentItem.lastPrice
 
 
     }
@@ -32,8 +32,8 @@ class HoldingAdapter(private val investments: List<Investment>) : RecyclerView.A
     override fun getItemCount() = investments.size
 
     class HoldingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val invName: TextView = itemView.findViewById(R.id.investmentName)
-        val invCode: TextView = itemView.findViewById(R.id.investmentCode)
-        val invPrice: TextView = itemView.findViewById(R.id.investmentPrice)
+        val invName: TextView = itemView.findViewById(R.id.holdingName)
+        val invCode: TextView = itemView.findViewById(R.id.holdingCode)
+        val invPrice: TextView = itemView.findViewById(R.id.holdingPrice)
     }
 }

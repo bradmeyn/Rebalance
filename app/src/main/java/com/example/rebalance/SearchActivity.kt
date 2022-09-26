@@ -18,47 +18,43 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private lateinit var selectedInvestment: Investment
     private lateinit var investmentList: ArrayList<Investment>
+    private  var args = Bundle(1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        investmentList = ArrayList<Investment>()
-//        val testList = ArrayList<Investment>()
-//
-//        val inv1 = Investment("Vanguard Aus", "VAS", 90)
-//        testList += inv1
-//        val inv2 = Investment("Vanguard Int", "VGS", 200)
 
-//        testList+= inv2
-//        print(testList)
-//        println(testList)
-//        binding.investmentList.adapter = InvestmentAdapter(testList)
-        binding.investmentList.layoutManager = LinearLayoutManager(this)
-        binding.investmentList.setHasFixedSize(true)
+        val myIntent = intent
+        val id = myIntent.getStringExtra("user_id")
+        val name = myIntent.getStringExtra("user_name")
+
         binding.searchBtn.setOnClickListener{
-
             var inputValue = binding.searchInput.text.toString()
             getInvestments(inputValue)
-
-
-//            binding.investmentList.adapter = InvestmentAdapter(testList)
-            binding.investmentList.layoutManager = LinearLayoutManager(this)
-            binding.investmentList.setHasFixedSize(true)
         }
+
+        val newHoldingFragment = AddHoldingFragment()
 
         binding.selectBtn.setOnClickListener{
-            val intent = Intent(this, AddHolding::class.java)
-            intent.putExtra("investment",selectedInvestment )
-            startActivity(intent)
+//            val intent = Intent(this, AddHolding::class.java)
+//            intent.putExtra("investment",selectedInvestment )
+//            startActivity(intent)
+
+
+            args.putSerializable("investment", selectedInvestment)
+            args.putString("id",id)
+            args.putString("name",name)
+            newHoldingFragment.arguments = args
+            supportFragmentManager.beginTransaction().apply {
+            replace(R.id.searchScreen,newHoldingFragment).addToBackStack(null)
+            commit()
         }
-
-
+        }
     }
 
-    private  fun getInvestments(query: String){
+    private fun getInvestments(query: String){
         println(query)
-
 
         val client = OkHttpClient()
 
@@ -86,15 +82,21 @@ class SearchActivity : AppCompatActivity() {
                         println(body)
 
                         val test = gson.fromJson(body,Example::class.java)
-                        val name = test.quoteResponse.result[0].longName.toString()
-                        val code = test.quoteResponse.result[0].symbol.toString()
-                        val price = test.quoteResponse.result[0].ask.toFloat()
+                        val name = test.quoteResponse.result[0].longName
+                        val code = test.quoteResponse.result[0].symbol
+                        val price = test.quoteResponse.result[0].ask.toFloat().toBigDecimal()
 
                         selectedInvestment = Investment(name, code, price)
                        runOnUiThread{
-                           investmentList += selectedInvestment
-                           binding.investmentList.adapter = InvestmentAdapter(investmentList)
-                           binding.testName.text = selectedInvestment.name
+                           binding.investmentName.text = name
+                           binding.investmentCode.text = code
+                           binding.investmentPrice.text = "$" + price.toString()
+
+
+
+//                           investmentList += selectedInvestment
+//                           binding.investmentList.adapter = InvestmentAdapter(investmentList)
+//                           binding.testName.text = selectedInvestment.name
                        }
 
                     }
@@ -104,17 +106,3 @@ class SearchActivity : AppCompatActivity() {
     }
 }
 
-data class Example(val quoteResponse: QuoteResponse)
-
-data class QuoteResponse(val error: Any?, val result: Array<Result>)
-
-data class Result(
-    val ask: Number,
-    val longName: String,
-    val symbol: String,
-    val ytdReturn: Number
-)
-
-data class QuoteSummary(val errorResult: ErrorResult)
-
-data class ErrorResult(val code: String, val description: String)

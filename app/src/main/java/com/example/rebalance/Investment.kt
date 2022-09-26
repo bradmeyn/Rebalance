@@ -1,9 +1,10 @@
 package com.example.rebalance
 
-import android.os.Parcelable
-import java.io.Serializable
 
-data class Investment(val name:String, val code:String, val price:Float): Serializable
+import java.io.Serializable
+import java.math.BigDecimal
+
+data class Investment(val name:String, val code:String, val price:BigDecimal): Serializable
 {
 
 }

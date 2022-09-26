@@ -1,25 +1,27 @@
 package com.example.rebalance
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user")
-    fun getAll(): List<User>
+    fun getAllUsers(): List<User>
 
-    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
-    fun loadAllByIds(userIds: IntArray): List<User>
+    @Transaction
+    @Query("SELECT * FROM user WHERE userId = :userId")
+    suspend fun getUser(userId: String):User
 
-//    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-//            "last_name LIKE :last LIMIT 1")
-//    fun findByName(first: String, last: String): User
 
-    @Insert
-    fun insertAll(vararg users: User)
+    @Insert(onConflict = OnConflictStrategy.REPLACE )
+    suspend fun addUser(user: User)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE )
+    suspend fun addHolding(holding: Holding)
+
+    @Transaction
+    @Query("SELECT * FROM user WHERE userId = :userId")
+    suspend fun getUserWithHoldings(userId: String):List<UserWithHoldings>
 
     @Delete
-    fun delete(user: User)
+    suspend fun delete(user: User)
 }
