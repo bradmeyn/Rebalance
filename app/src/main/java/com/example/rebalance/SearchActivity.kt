@@ -17,8 +17,8 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
     private lateinit var selectedInvestment: Investment
-    private lateinit var investmentList: ArrayList<Investment>
-    private  var args = Bundle(1)
+
+    private var args = Bundle(1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,8 @@ class SearchActivity : AppCompatActivity() {
 
         binding.searchBtn.setOnClickListener{
             var inputValue = binding.searchInput.text.toString()
-            getInvestments(inputValue)
+            getInvestment(inputValue)
+
         }
 
         val newHoldingFragment = AddHoldingFragment()
@@ -53,8 +54,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun getInvestments(query: String){
-        println(query)
+    private fun getInvestment(query: String){
 
         val client = OkHttpClient()
 
@@ -69,14 +69,10 @@ class SearchActivity : AppCompatActivity() {
                  override fun onFailure(call: Call, e: IOException) {
                     e.printStackTrace()
                 }
-
                 override fun onResponse(call: Call, response: Response) {
                     response.use {
                         if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
-//                        for ((name, value) in response.headers) {
-//                            println("$name: $value")
-//                        }
                         val gson = GsonBuilder().create()
                         val body = response.body?.string()
                         println(body)
@@ -84,7 +80,7 @@ class SearchActivity : AppCompatActivity() {
                         val test = gson.fromJson(body,Example::class.java)
                         val name = test.quoteResponse.result[0].longName
                         val code = test.quoteResponse.result[0].symbol
-                        val price = test.quoteResponse.result[0].ask.toFloat().toBigDecimal()
+                        val price = test.quoteResponse.result[0].ask.toString()
 
                         selectedInvestment = Investment(name, code, price)
                        runOnUiThread{
@@ -92,17 +88,10 @@ class SearchActivity : AppCompatActivity() {
                            binding.investmentCode.text = code
                            binding.investmentPrice.text = "$" + price.toString()
 
-
-
-//                           investmentList += selectedInvestment
-//                           binding.investmentList.adapter = InvestmentAdapter(investmentList)
-//                           binding.testName.text = selectedInvestment.name
                        }
-
                     }
                 }
             })
-
     }
 }
 

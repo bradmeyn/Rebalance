@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.google.gson.GsonBuilder
+import okhttp3.*
+import okio.IOException
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 import java.math.BigDecimal
@@ -16,6 +19,19 @@ data class Holding(
     @ColumnInfo val code:String,
     @ColumnInfo val units:Int,
     @ColumnInfo val avePrice: String,
-    @ColumnInfo val lastPrice: String,
-    @ColumnInfo val targetWeight: String
-    ):Serializable{}
+    @ColumnInfo val targetWeight: String,
+    @ColumnInfo var curPrice: String,
+    @ColumnInfo var currentWeight: String,
+    @ColumnInfo var value: String
+    ):Serializable{
+
+
+        fun updateValues(newPrice: Number){
+            curPrice = newPrice.toString()
+            value = (newPrice.toString().toBigDecimal() * units.toBigDecimal()).toString()
+        }
+
+        fun updateWeight(totalBalance: BigDecimal){
+            currentWeight = ((value.toBigDecimal()/totalBalance) * BigDecimal(100)).toString()
+        }
+    }

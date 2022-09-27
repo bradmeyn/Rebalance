@@ -57,8 +57,8 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
 
         addBtn = view.findViewById<Button>(R.id.addHoldingBtn)
         var unitsInput = view.findViewById<TextInputEditText>(R.id.unitsInput)
-        var priceInput = view.findViewById<TextInputEditText>(R.id.priceInput)
         var targetInput = view.findViewById<TextInputEditText>(R.id.targetInput)
+        var priceInput = view.findViewById<TextInputEditText>(R.id.priceInput)
 
         addBtn.setOnClickListener{
 
@@ -69,19 +69,13 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
                 passedInvestment.code,
                 unitsInput.text.toString().toInt(),
                 priceInput.text.toString(),
-                passedInvestment.price.toString(),
-                targetInput.text.toString()
+                targetInput.text.toString(),
+                passedInvestment.price,
+                "0",
+                "0"
             )
             saveHolding(newHolding)
 
-
-
-//            val holdingUnits = binding.unitsInput.text.toString().toInt()
-//            val holdingAvePrice = binding.priceInput.text.toString()
-//            val holdingTarget = binding.targetInput.text.toString()
-//            val newHolding = Holding(
-//                null,userId,holdingName,holdingCode,holdingUnits,holdingAvePrice,holdingPrice,holdingTarget
-//            )
             val intent = Intent(context, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.putExtra("user_id",id)
@@ -91,24 +85,12 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
         }
         return view
 
-
-
     }
 
     private fun saveHolding(newHolding: Holding){
-
-
         GlobalScope.launch(Dispatchers.IO){
             appDatabase.holdingDao().addHolding(newHolding)
         }
-
-        println("New Holding created")
-
-//        Toast.makeText(
-//            this@AddHoldingFragment,
-//            "User saved to database",
-//            Toast.LENGTH_SHORT
-//        ).show()
     }
 
 

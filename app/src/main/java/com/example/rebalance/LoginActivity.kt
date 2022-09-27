@@ -115,34 +115,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    private fun getUser(id: String,){
-
-
-//        GlobalScope.launch(Dispatchers.IO){
-//            var user = appDatabase.userDao().getUser(id)
-//            println("User found: "+user.toString())
-//        }
-
-        var newHolding = Holding(2,id,"test","code",4,"$50","$40","10%")
-
-
-            GlobalScope.launch(Dispatchers.IO){
-//                appDatabase.userDao().addHolding(newHolding)
-
-               var userWithHoldings =  appDatabase.userDao().getUserWithHoldings(id)
-
-                for (holding in userWithHoldings.elementAt(0).holdings){
-                    println(holding.toString())
-                }
-            }
-
-            println("New Holding created")
-
-
-        }
-
-
-
 
 
 

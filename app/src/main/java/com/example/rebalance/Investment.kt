@@ -4,7 +4,7 @@ package com.example.rebalance
 import java.io.Serializable
 import java.math.BigDecimal
 
-data class Investment(val name:String, val code:String, val price:BigDecimal): Serializable
+data class Investment(val name:String, val code:String, val price:String): Serializable
 {
 
 }

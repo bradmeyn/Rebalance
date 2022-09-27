@@ -21,9 +21,5 @@ object Helper {
         return isValid
     }
 
-
-
-
-
 }
 
