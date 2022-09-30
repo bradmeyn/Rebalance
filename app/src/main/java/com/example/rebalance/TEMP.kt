@@ -1,60 +1,39 @@
-package com.example.rebalance
-
-import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import androidx.annotation.RequiresApi
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.rebalance.databinding.ActivityMainBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.google.gson.GsonBuilder
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import okhttp3.*
-import okio.IOException
-import java.math.BigDecimal
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
-
-class MainActivity : AppCompatActivity() {
-
-    private var args = Bundle(1)
-    private lateinit var binding: ActivityMainBinding
+//package com.example.rebalance
+//
+//import android.content.Intent
+//import android.os.Build
+//import androidx.appcompat.app.AppCompatActivity
+//import android.os.Bundle
+//import androidx.annotation.RequiresApi
+//import androidx.recyclerview.widget.LinearLayoutManager
+//import com.example.rebalance.databinding.ActivityMainBinding
+//import com.google.firebase.auth.ktx.auth
+//import com.google.firebase.ktx.Firebase
+//import com.google.gson.GsonBuilder
+//import kotlinx.coroutines.Dispatchers
+//import kotlinx.coroutines.GlobalScope
+//import kotlinx.coroutines.launch
+//import okhttp3.*
+//import okio.IOException
+//import java.math.BigDecimal
+//import java.time.LocalDateTime
+//import java.time.format.DateTimeFormatter
+//import java.time.format.FormatStyle
+//
+//class MainActivity : AppCompatActivity() {
+//
+//    private lateinit var binding: ActivityMainBinding
 //    private lateinit var appDatabase: AppDatabase
 //    private lateinit var portfolio: ArrayList<Holding>
 //
 //    private val client by lazy {
 //        OkHttpClient()
 //    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val myIntent = intent
-        val userId = myIntent.getStringExtra("user_id")
-        val username = myIntent.getStringExtra("user_name")
-//        args.putString("id",id)
-        args.putString("userId", username)
-        args.putString("username", userId)
-
-//        newHoldingFragment.arguments = args
-
-        var navigationBar = binding.mainNavigationBar
-        val navController = findNavController(R.id.mainFragment)
-        navController.setGraph(R.navigation.nav_graph,args)
-        navigationBar.setupWithNavController(navController)
-
-
-
-    }
+//
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
 //        val myIntent = intent
 //        val id = myIntent.getStringExtra("user_id")
 //        val name = myIntent.getStringExtra("user_name")
@@ -80,13 +59,13 @@ class MainActivity : AppCompatActivity() {
 //            intent.putExtra("user_id",id)
 //            intent.putExtra("user_name",name)
 //            startActivity(intent)
-        }
-
-
-
-
-
-
+//        }
+//
+//
+//
+//
+//    }
+//
 //    fun buildRequest(code: String):Request {
 //        return Request.Builder()
 //            .url("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=$code")
@@ -95,8 +74,8 @@ class MainActivity : AppCompatActivity() {
 //            .addHeader("X-RapidAPI-Host", "apidojo-yahoo-finance-v1.p.rapidapi.com")
 //            .build()
 //    }
-
-//     fun getHoldings(id: String?) {
+//
+//    fun getHoldings(id: String?) {
 //
 //        GlobalScope.launch(Dispatchers.IO){
 //            if (id != null) {
@@ -117,8 +96,8 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-
-
+//
+//
 //    fun updateInvestments(portfolio: ArrayList<Holding>){
 //        var newPortfolio = ArrayList<Holding>()
 //        var totalValue = BigDecimal(0)
@@ -152,17 +131,18 @@ class MainActivity : AppCompatActivity() {
 //                                    }
 //                                    binding.portfolioValue.text = "$"+totalValue.toString()
 //                                    binding.holdingList.adapter = HoldingAdapter(newPortfolio)
-//                                    }
-//
 //                                }
-//                            count++;
+//
 //                            }
+//                            count++;
 //                        }
+//                    }
 //
 //                })
 //        }
 //
 //
 //    }
-
-
+//
+//
+//}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/ic_baseline_bar_chart_24"
+        android:title="Markets"
+        android:id="@+id/marketsFragment"
+        />
+    <item
+        android:icon="@drawable/ic_baseline_pie_chart_24"
+        android:title="Portfolio"
+        android:id="@+id/portfolioFragment"
+        />
+    <item
+        android:icon="@drawable/ic_baseline_bookmark_24"
+        android:title="Watchlist"
+        android:id="@+id/watchlistFragment"
+        />
+    <item
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Search"
+        android:id="@+id/searchFragment"
+        />
+</menu>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".PortfolioFragment">
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:id="@+id/valueContainer"-->
+<!--            android:layout_height="40dp"-->
+
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/dateText"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="10 July 2022"-->
+<!--                android:textSize="16dp" />-->
+
+<!--        </RelativeLayout>-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/holdingList"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="28dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/cardView"-->
+<!--            tools:layout_editor_absoluteX="0dp" />-->
+
+
+<!--        <Button-->
+<!--            android:id="@+id/addHoldingBtn"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:textSize="18dp"-->
+<!--            android:text="Add Holding"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/holdingList" />-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:id="@+id/cardView"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginHorizontal="30dp"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <RelativeLayout-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/portfolioName"-->
+<!--                    android:text="Your portfolio"-->
+<!--                    android:textSize="16dp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentBottom="true"-->
+<!--                    android:id="@+id/portfolioValue"-->
+<!--                    android:text="$0"-->
+<!--                    android:textSize="40dp" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+</FrameLayout>

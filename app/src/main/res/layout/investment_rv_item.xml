@@ -6,42 +6,96 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
-
+    android:id="@+id/marketCard"
     android:layout_height="wrap_content"
    >
 
     <RelativeLayout
+        android:id="@+id/marketCardAus"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/investmentCard">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <ImageView
+            android:id="@+id/flag"
+            android:layout_width="63dp"
+            android:layout_height="61dp"
+            android:padding="5dp"
+            app:srcCompat="@drawable/flag_aus" />
+        <!--  TEXT              -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/investmentName"
-            android:layout_toLeftOf="@+id/investmentPrice"
-            android:layout_margin="2dp"
-            android:padding="3dp"
-            android:text="Investment Name"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/investmentName"
-            android:id="@+id/investmentCode"
-            android:text="CODE"
-            android:padding="3dp"
-            android:layout_margin="2dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
-            android:padding="3dp"
-            android:text="$100"
-            android:id="@id/investmentPrice"/>
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/flag"
+            >
+
+            <RelativeLayout
+                android:id="@+id/ausTopRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/marketTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_toLeftOf="@+id/marketChange"
+                    android:padding="3dp"
+                    android:text=""
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/marketChange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="3dp"
+                    android:padding="3dp"
+                    android:text="%"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ausBottomRow"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/marketName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_toLeftOf="@+id/marketValue"
+                    android:padding="3dp"
+                    android:text="Australia"
+                    android:textSize="18dp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/marketValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+
+                    android:layout_marginRight="3dp"
+                    android:padding="3dp"
+                    android:text="1000.00"
+                    android:textSize="18dp" />
+            </RelativeLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 

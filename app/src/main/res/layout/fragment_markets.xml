@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".MarketsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/marketsTitle"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:text="Markets"
+                android:textSize="40dp" />
+
+            <TextView
+                android:id="@+id/dateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/marketsTitle"
+                android:padding="5dp"
+                android:text="10 July 2022"
+                android:textAlignment="textEnd"
+                android:textSize="16dp" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/marketsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="80dp"-->
+<!--            android:layout_margin="5dp"-->
+<!--            app:cardCornerRadius="5dp"-->
+<!--            app:cardElevation="3dp"-->
+<!--            >-->
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/marketCardAus"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/flag"-->
+<!--                    android:layout_width="63dp"-->
+<!--                    android:layout_height="61dp"-->
+<!--                    android:padding="5dp"-->
+<!--                    app:srcCompat="@drawable/flag_aus" />-->
+<!--                &lt;!&ndash;  TEXT              &ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_toRightOf="@+id/flag"-->
+<!--                    >-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:id="@+id/ausTopRow"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/marketTitleAus"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+
+<!--                            android:layout_marginStart="2dp"-->
+<!--                            android:layout_marginTop="2dp"-->
+<!--                            android:layout_marginEnd="2dp"-->
+<!--                            android:layout_marginBottom="2dp"-->
+<!--                            android:layout_toLeftOf="@+id/marketChangeAus"-->
+<!--                            android:padding="3dp"-->
+<!--                            android:text="Australia"-->
+<!--                            android:textSize="26dp"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@id/marketChangeAus"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_alignParentRight="true"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:layout_marginRight="3dp"-->
+<!--                            android:padding="3dp"-->
+<!--                            android:textSize="20dp"-->
+<!--                            android:textStyle="bold"-->
+<!--                            android:text="%" />-->
+<!--                    </RelativeLayout>-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:id="@+id/ausBottomRow"-->
+
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/marketNameAus"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_marginStart="2dp"-->
+
+<!--                            android:layout_marginEnd="2dp"-->
+<!--                            android:layout_marginBottom="2dp"-->
+<!--                            android:layout_toLeftOf="@+id/marketValueAus"-->
+<!--                            android:padding="3dp"-->
+<!--                            android:text="Australia"-->
+<!--                            android:textSize="18dp"-->
+<!--                            android:textStyle="italic" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@id/marketValueAus"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_alignParentRight="true"-->
+
+<!--                            android:layout_marginRight="3dp"-->
+<!--                            android:padding="3dp"-->
+<!--                            android:text="1000.00"-->
+<!--                            android:textSize="18dp" />-->
+<!--                    </RelativeLayout>-->
+<!--                </LinearLayout>-->
+
+<!--            </RelativeLayout>-->
+
+
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
