@@ -1,4 +1,4 @@
-package com.example.rebalance
+package com.example.rebalance.views
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.rebalance.database.AppDatabase
 import com.example.rebalance.Helper.noEmptyInputs
+import com.example.rebalance.models.User
 import com.example.rebalance.databinding.ActivityRegisterBinding
 import com.google.android.material.textfield.TextInputEditText
 

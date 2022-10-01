@@ -1,4 +1,4 @@
-package com.example.rebalance
+package com.example.rebalance.adapters
 
 
 import android.view.LayoutInflater
@@ -6,11 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.MainThread
-import androidx.appcompat.view.menu.MenuView
-import com.google.gson.GsonBuilder
-import okhttp3.*
-import okio.IOException
+import com.example.rebalance.models.Holding
+import com.example.rebalance.R
 
 class HoldingAdapter(private val investments: List<Holding>) : RecyclerView.Adapter<HoldingAdapter.HoldingViewHolder>() {
 

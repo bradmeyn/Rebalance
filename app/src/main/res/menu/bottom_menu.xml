@@ -21,4 +21,5 @@
         android:title="Search"
         android:id="@+id/searchFragment"
         />
+
 </menu>

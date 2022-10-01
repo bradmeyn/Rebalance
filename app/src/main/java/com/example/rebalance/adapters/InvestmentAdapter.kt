@@ -1,11 +1,12 @@
-package com.example.rebalance
+package com.example.rebalance.adapters
 
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView
+import com.example.rebalance.models.Investment
+import com.example.rebalance.R
 
 class InvestmentAdapter(private val investments: List<Investment>) : RecyclerView.Adapter<InvestmentAdapter.InvestmentViewHolder>() {
 

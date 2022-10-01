@@ -1,6 +1,7 @@
-package com.example.rebalance
+package com.example.rebalance.database
 
 import androidx.room.*
+import com.example.rebalance.models.Holding
 
 @Dao
 interface HoldingDao {

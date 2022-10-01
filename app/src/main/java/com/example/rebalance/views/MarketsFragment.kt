@@ -1,4 +1,4 @@
-package com.example.rebalance
+package com.example.rebalance.views
 
 import android.os.Build
 import android.os.Bundle
@@ -7,14 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.rebalance.adapters.MarketAdapter
+import com.example.rebalance.viewmodels.UserViewModel
 import com.example.rebalance.api.ApiClient
-import com.example.rebalance.api.MarketResponse
-import com.example.rebalance.api.Quote
 import com.example.rebalance.api.QuoteResponse
+import com.example.rebalance.databinding.FragmentMarketsBinding
 import retrofit2.Callback
 import retrofit2.Call
 import retrofit2.Response
@@ -34,10 +34,11 @@ private const val ARG_PARAM2 = "param2"
  */
 class MarketsFragment : Fragment() {
 
-    lateinit var dateText:TextView
-    // TODO: Rename and change types of parameters
     private var username: String? = null
     private var userId: String? = null
+    private var _binding: FragmentMarketsBinding? = null
+    private val binding get() = _binding!!
+    private val userViewModel: UserViewModel by activityViewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +47,8 @@ class MarketsFragment : Fragment() {
             userId = it.getString("username")
             username = it.getString("userId")
             println("on create")
-            println(username)
-            println(userId)
+            userId?.let { it1 -> userViewModel.setId(it1) }
+            userViewModel.setUsername(username!!)
 
         }
     }
@@ -57,21 +58,31 @@ class MarketsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = FragmentMarketsBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        var view =  inflater.inflate(R.layout.fragment_markets, container, false)
+//        var view =  inflater.inflate(R.layout.fragment_markets, container, false)
 
         if(arguments != null){
             username = requireArguments().getString("username").toString()
 
-            println("on create view")
-            println(username)
         } else {
             println("no arguments")
         }
-        var markets = "^AXJO, ^GSPC, ^FTSE, BTC-AUD"
+        getMarkets()
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+        val formattedDate = current.format(formatter)
+        _binding!!.dateText.text = formattedDate
+
+        return binding.root
+    }
+
+    fun getMarkets(){
+        var markets = "^AXJO, ^GSPC, ^FTSE, AUD-BTC"
+        //        ^HSI, AUDUSD=X, ^N225, BTC-AUD, ETH-AUD
         var titles = arrayOf("Australia", "United States", "United Kingdom", "Bitcoin")
         var imgs = arrayOf("flag_aus", "flag_usa", "flag_uk", "bitcoin")
-//        ^HSI, AUDUSD=X, ^N225, BTC-AUD, ETH-AUD
         val client = ApiClient.apiService.fetchQuotes("AU", markets )
         client.enqueue(object : Callback<QuoteResponse> {
 
@@ -83,7 +94,6 @@ class MarketsFragment : Fragment() {
                     Log.d("response", response.body().toString())
                     var quotes = response.body()?.quoteResult
                     quotes?.let {
-                        println(quotes)
                         var count = 0
                         for (quote in quotes.result){
                             quote.title = titles[count]
@@ -91,12 +101,10 @@ class MarketsFragment : Fragment() {
                             count++
                         }
                         val adapter = MarketAdapter(quotes.result)
-                        val recyclerView = view.findViewById<RecyclerView>(R.id.marketsRecyclerView)
+                        val recyclerView = _binding!!.marketsRecyclerView
                         var context = activity
                         recyclerView?.layoutManager = LinearLayoutManager(context)
                         recyclerView.adapter = adapter
-//                        view.findViewById<TextView>(R.id.marketNameAus).text
-
                     }
 
                 }
@@ -105,42 +113,16 @@ class MarketsFragment : Fragment() {
                 Log.e("Failure:", ""+t.message)
             }
         })
+    }
 
-
-
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-        val formattedDate = current.format(formatter)
-        println(formattedDate)
-        dateText = view.findViewById(R.id.dateText)
-        dateText.text = formattedDate
-        return view
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MarketsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MarketsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-}
+

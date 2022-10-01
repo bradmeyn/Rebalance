@@ -1,4 +1,4 @@
-package com.example.rebalance
+package com.example.rebalance.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.browser.customtabs.CustomTabsClient.getPackageName
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rebalance.R
 import com.example.rebalance.api.Quote
 import java.math.MathContext
 import java.math.RoundingMode

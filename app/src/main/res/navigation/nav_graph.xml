@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/marketsFragment"
-        android:name="com.example.rebalance.MarketsFragment"
+        android:name="com.example.rebalance.views.MarketsFragment"
         android:label="fragment_markets"
         tools:layout="@layout/fragment_markets" >
         <argument
@@ -16,17 +16,31 @@
     </fragment>
     <fragment
         android:id="@+id/watchlistFragment"
-        android:name="com.example.rebalance.WatchlistFragment"
+        android:name="com.example.rebalance.views.WatchlistFragment"
         android:label="fragment_watchlist"
         tools:layout="@layout/fragment_watchlist" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.rebalance.SearchFragment"
+        android:name="com.example.rebalance.views.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_addHoldingFragment"
+            app:destination="@id/addHoldingFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/portfolioFragment"
-        android:name="com.example.rebalance.PortfolioFragment"
+        android:name="com.example.rebalance.views.PortfolioFragment"
         android:label="fragment_portfolio"
         tools:layout="@layout/fragment_portfolio" />
+    <fragment
+        android:id="@+id/addHoldingFragment2"
+        android:name="com.example.rebalance.views.AddHoldingFragment"
+        android:label="fragment_add_holding"
+        tools:layout="@layout/fragment_add_holding" >
+        <action
+            android:id="@+id/action_addHoldingFragment2_to_portfolioFragment"
+            app:destination="@id/portfolioFragment" />
+    </fragment>
+
 </navigation>

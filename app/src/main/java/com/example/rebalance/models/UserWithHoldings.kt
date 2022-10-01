@@ -1,4 +1,4 @@
-package com.example.rebalance
+package com.example.rebalance.models
 
 import androidx.room.Embedded
 import androidx.room.Relation

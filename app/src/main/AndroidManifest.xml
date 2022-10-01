@@ -22,7 +22,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".views.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,10 +31,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".views.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:name=".views.MainActivity"
             android:exported="false" />
     </application>
 

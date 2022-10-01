@@ -1,4 +1,4 @@
-package com.example.rebalance
+package com.example.rebalance.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull
 data class User(
     @PrimaryKey @NotNull val userId: String = "noId",
     @ColumnInfo(name = "name") val name: String?,
-
-
 
     )
 

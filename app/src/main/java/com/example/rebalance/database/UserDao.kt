@@ -1,6 +1,9 @@
-package com.example.rebalance
+package com.example.rebalance.database
 
 import androidx.room.*
+import com.example.rebalance.models.Holding
+import com.example.rebalance.models.User
+import com.example.rebalance.models.UserWithHoldings
 
 @Dao
 interface UserDao {
@@ -9,7 +12,7 @@ interface UserDao {
 
     @Transaction
     @Query("SELECT * FROM user WHERE userId = :userId")
-    suspend fun getUser(userId: String):User
+    suspend fun getUser(userId: String): User
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE )

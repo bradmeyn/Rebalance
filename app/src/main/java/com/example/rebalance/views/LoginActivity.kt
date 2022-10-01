@@ -1,21 +1,20 @@
-package com.example.rebalance
+package com.example.rebalance.views
 
 import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.HeaderViewListAdapter
 import android.widget.TextView
 import android.widget.Toast
+import com.example.rebalance.database.AppDatabase
+import com.example.rebalance.Helper
+import com.example.rebalance.R
 import com.example.rebalance.databinding.ActivityLoginBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
