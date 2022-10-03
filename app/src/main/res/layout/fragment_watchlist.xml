@@ -6,16 +6,38 @@
     android:padding="20dp"
     tools:context=".views.WatchlistFragment">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/watchlistTitle"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Your Watchlist"
             android:textSize="22dp" />
 
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/watchlistRecycler"
+               android:layout_width="match_parent"
+               android:layout_height="427dp"
+               />
 
-    </RelativeLayout>
+           <Button
+               android:id="@+id/addInvestmentBtn"
+               android:layout_alignParentBottom="true"
+               android:layout_width="match_parent"
+               android:layout_height="61dp"
+               android:text="Add Investment" />
+       </RelativeLayout>
+
+
+    </LinearLayout>
+
+
 </FrameLayout>

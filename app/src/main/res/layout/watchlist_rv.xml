@@ -22,7 +22,7 @@
             android:layout_height="34dp">
 
             <TextView
-                android:id="@+id/holdingCode"
+                android:id="@+id/investmentCode"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -30,39 +30,39 @@
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="2dp"
                 android:layout_toStartOf="@id/rowOne"
-                android:layout_toLeftOf="@id/holdingPrice"
                 android:padding="3dp"
-                android:text="CODE.AX"
+                android:text=""
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:ignore="NotSibling" />
 
             <TextView
-
-                android:id="@+id/holdingPrice"
-                android:layout_width="70dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="82dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="2dp"
-                android:layout_toRightOf="@id/holdingCode"
+                android:id="@+id/investmentPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_toLeftOf="@id/investmentDayChange"
                 android:padding="3dp"
-                android:text="$189.37"
-                android:textSize="16dp" />
+                android:text=""
+                android:textAlignment="textEnd"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/holdingValue"
+                android:id="@+id/investmentDayChange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="3dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp"
+
                 android:padding="3dp"
-                android:text="$"
-                android:textSize="18dp"
+                android:text=""
+                android:textAlignment="textEnd"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -74,31 +74,19 @@
             android:layout_below="@id/rowOne">
 
             <TextView
-                android:id="@+id/holdingUnits"
-                android:layout_width="130dp"
+                android:id="@+id/investmentName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="2dp"
                 android:padding="3dp"
-                android:text="100 @ $79.87"
-                android:textSize="14dp" />
-            <TextView
-                android:id="@+id/holdingReturn"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_toRightOf="@+id/holdingUnits"
-                android:layout_marginBottom="2dp"
-                android:padding="3dp"
-                android:text="-$20,000 (-2.5%)"
+                android:text=""
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/holdingWeight"
+                android:id="@+id/targetPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -106,14 +94,16 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="2dp"
-                android:layout_toRightOf="@id/holdingReturn"
+                android:layout_toRightOf="@id/investmentName"
                 android:padding="3dp"
-                android:text="%"
+                android:text=""
+
                 android:textAlignment="textEnd"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textSize="14dp"
+                android:textStyle="italic" />
 
         </RelativeLayout>
+
 
     </RelativeLayout>
 

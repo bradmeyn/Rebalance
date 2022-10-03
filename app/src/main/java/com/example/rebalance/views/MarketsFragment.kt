@@ -49,7 +49,6 @@ class MarketsFragment : Fragment() {
             println("on create")
             userId?.let { it1 -> userViewModel.setId(it1) }
             userViewModel.setUsername(username!!)
-
         }
     }
 

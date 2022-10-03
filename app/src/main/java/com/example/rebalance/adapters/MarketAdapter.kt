@@ -17,7 +17,7 @@ class MarketAdapter(private val markets: List<Quote>) : RecyclerView.Adapter<Mar
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarketViewHolder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.investment_rv_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.market_rv, parent, false)
 
         return MarketViewHolder(itemView)
 

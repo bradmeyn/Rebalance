@@ -46,7 +46,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/searchInput"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="55dp"
                     android:hint="Search symbol"
                     android:inputType="text"
                     android:textSize="18dp"
@@ -55,14 +55,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@id/searchBtn"
+                android:id="@+id/searchButton"
                 android:layout_width="123dp"
                 android:layout_height="66dp"
+                android:layout_marginLeft="12dp"
                 android:text="Search"
                 android:textSize="15dp"
                 app:layout_constraintLeft_toRightOf="@id/searchLayout"
-                app:layout_constraintTop_toTopOf="@id/searchContainer"
-                />
+                app:layout_constraintTop_toTopOf="@id/searchContainer" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -118,7 +118,7 @@
 
             <RelativeLayout
                 android:id="@+id/marketCardAus"
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -146,7 +146,7 @@
                             android:layout_toLeftOf="@+id/investmentPrice"
                             android:padding="3dp"
                             android:text="CODE"
-                            android:textSize="22dp"
+                            android:textSize="18dp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -193,7 +193,8 @@
                             android:layout_marginRight="3dp"
                             android:padding="3dp"
                             android:text=""
-                            android:textSize="18dp" />
+                            android:textStyle="bold"
+                            android:textSize="14dp" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -201,9 +202,17 @@
 
         </androidx.cardview.widget.CardView>
 
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="72dp">
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true">
 
             <Button
 
@@ -212,11 +221,8 @@
                 android:layout_height="65dp"
                 android:layout_margin="10dp"
                 android:text="Add to Portfolio"
-                android:textSize="16dp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/watchlistBtn"
@@ -224,13 +230,11 @@
                 android:layout_height="65dp"
                 android:layout_margin="10dp"
                 android:text="Add to Watchlist"
-                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/portfolioBtn"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/portfolioBtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </FrameLayout>

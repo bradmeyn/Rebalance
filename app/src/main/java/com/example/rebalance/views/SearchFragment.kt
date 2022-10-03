@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.rebalance.R
@@ -16,6 +19,7 @@ import com.example.rebalance.viewmodels.UserViewModel
 import com.example.rebalance.api.ApiClient
 import com.example.rebalance.api.QuoteResponse
 import com.example.rebalance.databinding.FragmentSearchBinding
+import com.example.rebalance.models.Investment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +32,9 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private val userViewModel: UserViewModel by activityViewModels()
+
     private lateinit var navController: NavController
+    private lateinit var selectedInvestment: Investment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +49,9 @@ class SearchFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-        binding.searchBtn.setOnClickListener {
+        binding.searchButton.setOnClickListener {
             var query = binding.searchInput.text.toString()
             var auBtn = binding.auRadioBtn.isChecked
-
 
             if(isValidateSearch(query)){
                 if(auBtn) {
@@ -88,6 +93,13 @@ class SearchFragment : Fragment() {
                         if(investment.oneDayChange.toDouble() > 0){
                             binding.investmentChange.setTextColor(Color.parseColor("#489361"))
                         }
+                        selectedInvestment = Investment(
+                            investment.longName.toString(),
+                            investment.symbol,
+                            investment.price
+                        )
+
+                        userViewModel.setSelectedInvestment(selectedInvestment)
                         }
                     }
 
@@ -106,6 +118,10 @@ class SearchFragment : Fragment() {
         navController = Navigation.findNavController(view)
         binding.portfolioBtn.setOnClickListener{
             navController!!.navigate(R.id.action_searchFragment_to_addHoldingFragment)
+        }
+
+        binding.watchlistBtn.setOnClickListener{
+            navController!!.navigate(R.id.action_searchFragment_to_addWatchItemFragment)
         }
     }
 
@@ -134,13 +150,6 @@ class SearchFragment : Fragment() {
             validSearch = false
         }
 
-
-//        if(!binding.emailInput.text.toString().matches(Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$"))){
-//            binding.emailInput.setError("Invalid email format")
-//            Toast.makeText(baseContext, "Invalid email format.",
-//                Toast.LENGTH_SHORT).show()
-//            validInputs = false
-//        }
 
         return validSearch
     }

@@ -6,11 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.rebalance.models.Holding
 import com.example.rebalance.models.User
+import com.example.rebalance.models.WatchItem
 
-@Database(entities = [User::class, Holding::class], version = 7, exportSchema = false)
+@Database(entities = [User::class, Holding::class, WatchItem::class], version = 7, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun holdingDao(): HoldingDao
+
 
     companion object {
 

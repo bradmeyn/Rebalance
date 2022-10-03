@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:elevation="5dp"
-    tools:context=".views.AddHoldingFragment">
+    tools:context=".views.AddWatchItemFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -69,7 +69,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/unitsLayout"
+        android:id="@+id/targetPriceContainer"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="30dp"
@@ -80,64 +80,24 @@
         app:layout_constraintTop_toBottomOf="@id/investmentContainer" >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/unitsInput"
-            android:hint="Units"
+            android:id="@+id/targetPriceInput"
+            android:hint="Target Price ($)"
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- PASSWORD    -->
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/priceLayout"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="20dp"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unitsLayout" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/priceInput"
-            android:hint="average price ($)"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- TARGET    -->
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/targetLayout"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="20dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceLayout" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/targetInput"
-            android:hint="Target (%)"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/addHoldingBtn"
+        android:id="@+id/addItemBtn"
         android:layout_width="match_parent"
         android:layout_height="62dp"
         android:layout_marginTop="32dp"
         android:layout_marginHorizontal="20dp"
-        android:text="Add Holding"
+        android:text="Add to Watchlist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/targetPriceContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
