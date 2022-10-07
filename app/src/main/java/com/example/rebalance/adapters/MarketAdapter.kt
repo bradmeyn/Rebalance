@@ -30,6 +30,11 @@ class MarketAdapter(private val markets: List<Quote>) : RecyclerView.Adapter<Mar
 
        holder.title.text = market.title
         holder.name.text = market.shortName
+        if (market.marketState == "REGULAR"){
+            holder.status.text = "Open"
+        } else {
+            holder.status.text = "Closed"
+        }
         holder.change.text = market.oneDayChange.toBigDecimal().round(MathContext(3, RoundingMode.HALF_UP)).toString() + "%"
         if(market.oneDayChange.toDouble() <0){
             holder.change.setTextColor(Color.parseColor("#a61111"))
@@ -52,6 +57,7 @@ class MarketAdapter(private val markets: List<Quote>) : RecyclerView.Adapter<Mar
 
     class MarketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.marketTitle)
+        val status: TextView = itemView.findViewById(R.id.status)
         val name: TextView = itemView.findViewById(R.id.marketName)
         val change: TextView = itemView.findViewById(R.id.marketChange)
         val value: TextView = itemView.findViewById(R.id.marketValue)

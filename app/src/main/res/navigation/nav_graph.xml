@@ -21,7 +21,9 @@
         tools:layout="@layout/fragment_watchlist" >
         <action
             android:id="@+id/action_watchlistFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/searchFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -30,10 +32,14 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_addHoldingFragment"
-            app:destination="@id/addHoldingFragment2" />
+            app:destination="@id/addHoldingFragment2"
+            app:popUpTo="@id/watchlistFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_searchFragment_to_addWatchItemFragment"
-            app:destination="@id/addWatchItemFragment" />
+            app:destination="@id/addWatchItemFragment"
+            app:popUpTo="@id/watchlistFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/portfolioFragment"
@@ -42,7 +48,9 @@
         tools:layout="@layout/fragment_portfolio" >
         <action
             android:id="@+id/action_portfolioFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/portfolioFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addHoldingFragment2"
@@ -51,7 +59,9 @@
         tools:layout="@layout/fragment_add_holding" >
         <action
             android:id="@+id/action_addHoldingFragment_to_portfolioFragment"
-            app:destination="@id/portfolioFragment" />
+            app:destination="@id/portfolioFragment"
+            app:popUpTo="@id/portfolioFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addWatchItemFragment"
@@ -60,7 +70,9 @@
         tools:layout="@layout/fragment_add_watch_item" >
         <action
             android:id="@+id/action_addWatchItemFragment_to_watchlistFragment"
-            app:destination="@id/watchlistFragment" />
+            app:destination="@id/watchlistFragment"
+            app:popUpTo="@id/watchlistFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

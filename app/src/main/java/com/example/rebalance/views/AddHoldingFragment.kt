@@ -17,7 +17,9 @@ import com.example.rebalance.database.AppDatabase
 import com.example.rebalance.databinding.FragmentAddHoldingBinding
 import com.example.rebalance.models.Holding
 import com.example.rebalance.models.Investment
+import com.example.rebalance.viewmodels.HoldingViewModel
 import com.example.rebalance.viewmodels.UserViewModel
+import com.example.rebalance.viewmodels.WatchItemViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -30,6 +32,8 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
     private lateinit var newHolding: Holding
     private lateinit var appDatabase: AppDatabase
     private val userViewModel: UserViewModel by activityViewModels()
+    private val holdingViewModel: HoldingViewModel by activityViewModels()
+
     private lateinit var userId:String
     private lateinit var navController: NavController
 
@@ -44,6 +48,7 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
         _binding = FragmentAddHoldingBinding.inflate(inflater, container, false)
         userViewModel.id.observe(viewLifecycleOwner) { id ->
             userId = id;
+
         }
 
         userViewModel.selectedInvestment.observe(viewLifecycleOwner) { investment:Investment ->
@@ -54,28 +59,30 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
 
         binding.addHoldingBtn.setOnClickListener {
 
-            userViewModel.selectedInvestment.observe(viewLifecycleOwner) { selectedInvestment: Investment ->
+            if(validInputs()){
+                userViewModel.selectedInvestment.observe(viewLifecycleOwner) { selectedInvestment: Investment ->
 
                 newHolding = Holding(
-                    null,
+                    selectedInvestment.code,
                     userId,
                     selectedInvestment.name,
-                    selectedInvestment.code,
                     binding.unitsInput.text.toString().toInt(),
                     binding.priceInput.text.toString(),
                     binding.targetInput.text.toString(),
                     selectedInvestment.price,
-                    "weight",
-                    "value"
+                    "0",
+                    "0"
                 )
 
-//                userViewModel.addHolding(newHolding)
+                }
+                holdingViewModel.insert(newHolding)
+                navController!!.navigate(R.id.action_addHoldingFragment_to_portfolioFragment)
+
             }
-            navController!!.navigate(R.id.action_addHoldingFragment_to_portfolioFragment)
-//            saveHolding(newHolding)
+
+
+//
           }
-
-
 
         return binding.root
 
@@ -92,11 +99,15 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
         _binding = null
     }
 
-//    private fun saveHolding(newHolding: Holding){
-//        GlobalScope.launch(Dispatchers.IO){
-//            appDatabase.holdingDao().addHolding(newHolding)
-//        }
-//    }
+    private fun validInputs():Boolean{
+        var validInputs = true
+
+        validInputs = Helper.isValidPrice(binding.unitsInput)
+        validInputs = Helper.isValidPrice(binding.priceInput)
+        validInputs = Helper.isValidPrice(binding.targetInput)
+
+        return validInputs
+    }
 
 
 }

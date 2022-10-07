@@ -67,25 +67,43 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/targetPriceContainer"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginHorizontal="20dp"
+   <RelativeLayout
+       android:id="@+id/targetPriceLayout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@id/investmentContainer"
+       >
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="20dp"
+           android:layout_marginTop="2dp"
+           android:layout_marginEnd="2dp"
+           android:layout_marginBottom="2dp"
+           android:padding="3dp"
+           android:text="Optional:"
+           android:textSize="16dp" />
+       <com.google.android.material.textfield.TextInputLayout
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:id="@+id/targetPriceContainer"
+           android:layout_width="match_parent"
+           android:layout_height="75dp"
+           android:layout_marginTop="30dp"
+           android:layout_marginHorizontal="20dp"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/investmentContainer" >
+     >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/targetPriceInput"
-            android:hint="Target Price ($)"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/targetPriceInput"
+               android:hint="Target Price ($)"
+               android:inputType="text"
+               android:layout_width="match_parent"
+               android:layout_height="50dp"/>
+       </com.google.android.material.textfield.TextInputLayout>
+   </RelativeLayout>
 
 
 
@@ -98,6 +116,6 @@
         android:text="Add to Watchlist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetPriceContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/targetPriceLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

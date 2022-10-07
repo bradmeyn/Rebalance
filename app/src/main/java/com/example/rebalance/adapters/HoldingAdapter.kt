@@ -1,6 +1,7 @@
 package com.example.rebalance.adapters
 
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
@@ -25,10 +26,23 @@ class HoldingAdapter(private val investments: List<Holding>) : RecyclerView.Adap
 
         holder.apply {
             weight.text = currentHolding.currentWeight+"%"
+
+            if(!currentHolding.isBalanced()){
+                weight.setTextColor(Color.parseColor("#a61111"))
+            }
+
             code.text = currentHolding.code
-            units.text = currentHolding.units.toString()
+            units.text = currentHolding.units.toString() + " @ $" + currentHolding.avePrice
             price.text = "$"+currentHolding.curPrice
-            value.text = "$"+currentHolding.value
+            value.text = "$"+currentHolding.calculateCurrentValue().toString()
+
+            returnValue.text = currentHolding.calculateDollarReturn().toString() + "/" + currentHolding.calculatePercentageReturn().toString() + "%"
+            if(currentHolding.calculateDollarReturn().toDouble() <0){
+                returnValue.setTextColor(Color.parseColor("#a61111"))
+            }
+            if(currentHolding.calculateDollarReturn().toDouble() > 0){
+                returnValue.setTextColor(Color.parseColor("#489361"))
+            }
         }
 
 
@@ -43,6 +57,8 @@ class HoldingAdapter(private val investments: List<Holding>) : RecyclerView.Adap
         val price: TextView = itemView.findViewById(R.id.holdingPrice)
         val value: TextView = itemView.findViewById(R.id.holdingValue)
         val weight: TextView = itemView.findViewById(R.id.holdingWeight)
+        val returnValue: TextView = itemView.findViewById(R.id.holdingReturn)
+
     }
 
 

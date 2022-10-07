@@ -2,21 +2,31 @@ package com.example.rebalance.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.rebalance.R
 import com.example.rebalance.databinding.ActivityMainBinding
+import com.example.rebalance.models.WatchItem
+import com.example.rebalance.viewmodels.HoldingViewModel
+import com.example.rebalance.viewmodels.HoldingViewModelFactory
+import com.example.rebalance.viewmodels.WatchItemViewModel
+import com.example.rebalance.viewmodels.WatchItemViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
     private var args = Bundle(1)
     private lateinit var binding: ActivityMainBinding
-//    private lateinit var appDatabase: AppDatabase
-//    private lateinit var portfolio: ArrayList<Holding>
-//
-//    private val client by lazy {
-//        OkHttpClient()
-//    }
+
+    private val watchItemViewModel: WatchItemViewModel by viewModels {
+        WatchItemViewModelFactory((application as RebalanceApplication).watchlistRepo)
+    }
+
+    private val holdingViewModel: HoldingViewModel by viewModels {
+        HoldingViewModelFactory((application as RebalanceApplication).portfolioRepo)
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,123 +41,20 @@ class MainActivity : AppCompatActivity() {
         args.putString("username", userId)
 
 //        newHoldingFragment.arguments = args
+//        println("watchlist")
+//        var watchItem2 = WatchItem("VAS.AX", "userID","Vanguard Int", "89.55", "83.00")
+//        watchItemViewModel.insert(watchItem2)
+        println(holdingViewModel.portfolio.value.toString())
+        println(watchItemViewModel.watchlist.value.toString())
+
 
         var navigationBar = binding.mainNavigationBar
         val navController = findNavController(R.id.mainFragment)
-        navController.setGraph(R.navigation.nav_graph,args)
+        navController.setGraph(R.navigation.nav_graph, args)
         navigationBar.setupWithNavController(navController)
 
 
-
     }
-//        val myIntent = intent
-//        val id = myIntent.getStringExtra("user_id")
-//        val name = myIntent.getStringExtra("user_name")
-//        binding.portfolioName.text = name + "'s portfolio"
-//        appDatabase = AppDatabase.getDatabase(this)
-//        setContentView(binding.root)
-//        val current = LocalDateTime.now()
-//        val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-//        val formatted = current.format(formatter)
-//        binding.dateText.text = formatted
-//        getHoldings(id)
-//        portfolio = ArrayList<Holding>()
-//
-//
-//        binding.holdingList.layoutManager = LinearLayoutManager(this)
-//        binding.holdingList.adapter = HoldingAdapter(portfolio)
-//        binding.holdingList.setHasFixedSize(true)
-//
-//
-//        binding.addHoldingBtn.setOnClickListener{
-//            val intent = Intent(this, SearchActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            intent.putExtra("user_id",id)
-//            intent.putExtra("user_name",name)
-//            startActivity(intent)
-        }
-
-
-
-
-
-
-//    fun buildRequest(code: String):Request {
-//        return Request.Builder()
-//            .url("https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=$code")
-//            .get()
-//            .addHeader("X-RapidAPI-Key", "3b9f8f6bd6msh7827635732b7bf6p145cc2jsn08bb77e7682c")
-//            .addHeader("X-RapidAPI-Host", "apidojo-yahoo-finance-v1.p.rapidapi.com")
-//            .build()
-//    }
-
-//     fun getHoldings(id: String?) {
-//
-//        GlobalScope.launch(Dispatchers.IO){
-//            if (id != null) {
-//
-//                if(appDatabase.userDao().getUserWithHoldings(id).isNotEmpty()) {
-//
-//                    portfolio = appDatabase.userDao().getUserWithHoldings(id).elementAt( 0).holdings as ArrayList<Holding>
-//
-//                    updateInvestments(portfolio)
-//                    runOnUiThread{
-//                        binding.holdingList.adapter = HoldingAdapter(portfolio)
-//
-//                    }
-//                    println("get holdings first" +portfolio.toString())
-//                } else {
-//                    println("Portfolio is Empty")
-//                }
-//            }
-//        }
-//    }
-
-
-//    fun updateInvestments(portfolio: ArrayList<Holding>){
-//        var newPortfolio = ArrayList<Holding>()
-//        var totalValue = BigDecimal(0)
-//        var count = 0
-//        for (holding in portfolio){
-//            client.newCall(buildRequest(holding.code))
-//                .enqueue(object : Callback {
-//                    override fun onFailure(call: Call, e: IOException) {
-//                        println("Request failed")
-//                        e.printStackTrace()
-//                    }
-//                    override fun onResponse(call: Call, response: Response) {
-//                        response.use {
-//                            if (!response.isSuccessful) throw IOException("Unexpected code $response")
-//                            val gson = GsonBuilder().create()
-//                            val body = response.body?.string()
-//                            val test = gson.fromJson(body,Example::class.java)
-//                            val name = test.quoteResponse.result[0].longName
-//                            val code = test.quoteResponse.result[0].symbol
-//                            val price = test.quoteResponse.result[0].ask
-//                            holding.updateValues(price)
-//                            newPortfolio+=holding
-//                            totalValue+= holding.value.toBigDecimal()
-//
-//
-//                            runOnUiThread{
-//
-//                                if(count == portfolio.size -1) {
-//                                    for (current in portfolio) {
-//                                        current.updateWeight(totalValue)
-//                                    }
-//                                    binding.portfolioValue.text = "$"+totalValue.toString()
-//                                    binding.holdingList.adapter = HoldingAdapter(newPortfolio)
-//                                    }
-//
-//                                }
-//                            count++;
-//                            }
-//                        }
-//
-//                })
-//        }
-//
-//
-//    }
+    }
 
 

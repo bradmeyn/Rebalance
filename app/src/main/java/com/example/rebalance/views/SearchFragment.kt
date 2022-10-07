@@ -57,12 +57,9 @@ class SearchFragment : Fragment() {
                 if(auBtn) {
                     query+= ".AX"
                 }
-                println(query)
                 searchInvestment(query)
             }
         }
-
-
 
         return binding.root
     }
@@ -80,26 +77,35 @@ class SearchFragment : Fragment() {
                     println("success")
                     var quotes = response.body()?.quoteResult
                     quotes?.let {
-                        println(quotes)
-                        var investment = quotes.result[0]
-                        binding.marketCardAus.visibility = android.view.View.VISIBLE
-                        binding.investmentName.text= investment.longName.toString()
-                        binding.investmentCode.text= investment.symbol
-                        binding.investmentPrice.text = "$" + investment.price
-                        binding.investmentChange.text= investment.oneDayChange.toBigDecimal().round(MathContext(3, RoundingMode.HALF_UP)).toString() + "%"
-                        if(investment.oneDayChange.toDouble() <0){
-                            binding.investmentChange.setTextColor(Color.parseColor("#a61111"))
-                        }
-                        if(investment.oneDayChange.toDouble() > 0){
-                            binding.investmentChange.setTextColor(Color.parseColor("#489361"))
-                        }
-                        selectedInvestment = Investment(
-                            investment.longName.toString(),
-                            investment.symbol,
-                            investment.price
-                        )
 
-                        userViewModel.setSelectedInvestment(selectedInvestment)
+                if(quotes.result.size > 0){
+                    var investment = quotes.result[0]
+                    binding.marketCardAus.visibility = android.view.View.VISIBLE
+                    binding.investmentName.text= investment.longName.toString()
+                    binding.investmentCode.text= investment.symbol
+                    binding.investmentPrice.text = "$" + investment.price
+                    binding.investmentChange.text= investment.oneDayChange.toBigDecimal().round(MathContext(3, RoundingMode.HALF_UP)).toString() + "%"
+                    if(investment.oneDayChange.toDouble() <0){
+                        binding.investmentChange.setTextColor(Color.parseColor("#a61111"))
+                    }
+                    if(investment.oneDayChange.toDouble() > 0){
+                        binding.investmentChange.setTextColor(Color.parseColor("#489361"))
+                    }
+                    selectedInvestment = Investment(
+                        investment.longName.toString(),
+                        investment.symbol,
+                        investment.price
+                    )
+                    userViewModel.setSelectedInvestment(selectedInvestment)
+                } else {
+                    binding.searchInput.text?.clear()
+                    binding.searchInput.setError("No investment with that symbol was found")
+                    Toast.makeText(
+                        context, "No investment with that symbol was found",
+                        Toast.LENGTH_LONG).show()
+
+
+                }
                         }
                     }
 

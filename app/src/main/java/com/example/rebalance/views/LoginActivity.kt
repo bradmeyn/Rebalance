@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        appDatabase = AppDatabase.getDatabase(this)
+//        appDatabase = AppDatabase.getDatabase(this)
         auth = Firebase.auth
 
         val registerLink = findViewById<TextView>(R.id.registerLink)
@@ -54,8 +54,6 @@ class LoginActivity : AppCompatActivity() {
 
                             val userId = user!!.uid
                             println("Checking if IDs match")
-                            println(userId)
-                            println(userId.equals("Mwa5PLoqfveqQRW5CCUZ9dvKULz1"))
 
                             val username = user!!.displayName
                             if (user != null) {

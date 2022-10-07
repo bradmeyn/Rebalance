@@ -9,10 +9,10 @@ import java.math.BigDecimal
 
 @Entity
 data class Holding(
-    @PrimaryKey(autoGenerate = true) val holdingId:Int? = 0,
+
+    @PrimaryKey @NotNull val code:String,
     @ColumnInfo val userId: String,
     @ColumnInfo val name:String,
-    @ColumnInfo val code:String,
     @ColumnInfo val units:Int,
     @ColumnInfo val avePrice: String,
     @ColumnInfo val targetWeight: String,
@@ -21,10 +21,34 @@ data class Holding(
     @ColumnInfo var value: String
     ):Serializable{
 
+        fun calculateCostbase():BigDecimal{
+            return avePrice.toBigDecimal() * units.toBigDecimal()
+        }
 
-        fun updateValues(newPrice: Number){
-            curPrice = newPrice.toString()
-            value = (newPrice.toString().toBigDecimal() * units.toBigDecimal()).toString()
+        fun calculateCurrentValue():BigDecimal{
+            return curPrice.toBigDecimal() * units.toBigDecimal()
+        }
+
+        fun calculateDollarReturn():BigDecimal {
+            val costbase = calculateCostbase()
+            val value = calculateCurrentValue()
+            return value - costbase
+        }
+
+        fun calculatePercentageReturn():BigDecimal {
+            val costbase = calculateCostbase()
+            val value = calculateCurrentValue()
+            return ((value - costbase) / costbase) * BigDecimal(100)
+        }
+
+        fun isBalanced():Boolean{
+            var isBalanced = true
+            println("Current Weight " + currentWeight)
+            println("Target Weight " + targetWeight)
+            if((BigDecimal(currentWeight) - BigDecimal(targetWeight)).abs()> BigDecimal(5)){
+                isBalanced = false
+            }
+            return isBalanced
         }
 
         fun updateWeight(totalBalance: BigDecimal){

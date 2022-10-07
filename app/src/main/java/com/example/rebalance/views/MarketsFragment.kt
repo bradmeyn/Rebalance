@@ -46,7 +46,6 @@ class MarketsFragment : Fragment() {
         arguments?.let {
             userId = it.getString("username")
             username = it.getString("userId")
-            println("on create")
             userId?.let { it1 -> userViewModel.setId(it1) }
             userViewModel.setUsername(username!!)
         }
@@ -57,6 +56,7 @@ class MarketsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentMarketsBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
 //        var view =  inflater.inflate(R.layout.fragment_markets, container, false)
@@ -78,10 +78,9 @@ class MarketsFragment : Fragment() {
     }
 
     fun getMarkets(){
-        var markets = "^AXJO, ^GSPC, ^FTSE, AUD-BTC"
-        //        ^HSI, AUDUSD=X, ^N225, BTC-AUD, ETH-AUD
-        var titles = arrayOf("Australia", "United States", "United Kingdom", "Bitcoin")
-        var imgs = arrayOf("flag_aus", "flag_usa", "flag_uk", "bitcoin")
+        var markets = "^AXJO, ^GSPC, ^FTSE, ^HSI, AUDUSD=X, ^N225, BTC-AUD, ETH-AUD"
+        var titles = arrayOf("Australia", "United States", "United Kingdom", "Hong Kong", "Aus Dollar", "Japan", "Bitcoin", "Ethereum")
+        var imgs = arrayOf("flag_aus", "flag_usa", "flag_uk", "flag_china", "flag_aus", "flag_japan", "bitcoin", "ethereum")
         val client = ApiClient.apiService.fetchQuotes("AU", markets )
         client.enqueue(object : Callback<QuoteResponse> {
 

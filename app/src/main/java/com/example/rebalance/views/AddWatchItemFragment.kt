@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.example.rebalance.Helper
 import com.example.rebalance.R
 import com.example.rebalance.database.AppDatabase
 import com.example.rebalance.databinding.FragmentAddHoldingBinding
@@ -16,6 +17,8 @@ import com.example.rebalance.models.Holding
 import com.example.rebalance.models.Investment
 import com.example.rebalance.models.WatchItem
 import com.example.rebalance.viewmodels.UserViewModel
+import com.example.rebalance.viewmodels.WatchItemViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,6 +29,7 @@ class AddWatchItemFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var newWatchlistItem: WatchItem
     private val userViewModel: UserViewModel by activityViewModels()
+    private val watchItemViewModel: WatchItemViewModel by activityViewModels()
     private lateinit var userId:String
     private lateinit var navController: NavController
 
@@ -54,19 +58,19 @@ class AddWatchItemFragment : Fragment() {
 
         binding.addItemBtn.setOnClickListener {
 
-            userViewModel.selectedInvestment.observe(viewLifecycleOwner) { selectedInvestment: Investment ->
-
-                var newInvestment = WatchItem(
-                selectedInvestment.price,
-                    userId,
-                    selectedInvestment.name,
-                    selectedInvestment.price,binding.targetPriceInput.text.toString()
-                )
-
+            if(Helper.isValidPrice(binding.targetPriceInput)){
+                userViewModel.selectedInvestment.observe(viewLifecycleOwner) { selectedInvestment: Investment ->
+                    newWatchlistItem = WatchItem(
+                        selectedInvestment.code,
+                        userId,
+                        selectedInvestment.name,
+                        selectedInvestment.price,
+                        binding.targetPriceInput.text.toString()
+                    )
+                }
+                watchItemViewModel.insert(newWatchlistItem)
+                navController!!.navigate(R.id.action_addWatchItemFragment_to_watchlistFragment)
             }
-
-            navController!!.navigate(R.id.action_addWatchItemFragment_to_watchlistFragment)
-//            saveHolding(newHolding)
         }
 
         return binding.root
@@ -77,12 +81,4 @@ class AddWatchItemFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
     }
-
-//    private fun saveHolding(newHolding: Holding){
-//        GlobalScope.launch(Dispatchers.IO){
-//            appDatabase.holdingDao().addHolding(newHolding)
-//        }
-//    }
-
-
 }

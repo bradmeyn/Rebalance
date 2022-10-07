@@ -1,6 +1,8 @@
 package com.example.rebalance
 
 import com.google.android.material.textfield.TextInputEditText
+import java.lang.NumberFormatException
+import java.math.BigDecimal
 
 object Helper {
     @JvmStatic
@@ -19,6 +21,24 @@ object Helper {
             }
         }
         return isValid
+    }
+
+    @JvmStatic
+    fun isValidPrice(input: TextInputEditText):Boolean{
+        var validPrice = true
+        println(input.text.toString().toBigDecimalOrNull())
+        if(input.text.toString().toBigDecimalOrNull() == null){
+            println("Is not a valid number")
+            input.setError("Invalid number format")
+            validPrice = false
+            return validPrice
+        }
+        if(input.text.toString().toBigDecimal() <= BigDecimal(0)){
+            input.setError("Value cannot be empty or negative")
+            validPrice = false
+        }
+
+        return validPrice
     }
 
 }

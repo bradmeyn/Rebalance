@@ -29,8 +29,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
+        freeCompilerArgs = ['-Xjvm-default=compatibility']
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+
 
     buildFeatures {
         viewBinding = true
@@ -71,6 +76,7 @@ dependencies {
 
     // Kotlin
     implementation "androidx.fragment:fragment-ktx:1.5.3"
+
 
     // API
     implementation "com.squareup.retrofit2:retrofit:2.9.0"

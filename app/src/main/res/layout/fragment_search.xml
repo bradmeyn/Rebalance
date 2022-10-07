@@ -25,7 +25,7 @@
             android:text="Search"
             android:textSize="22dp"
             />
-        <!-- NAME    -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searchContainer"
             android:layout_width="410dp"
@@ -104,7 +104,19 @@
 
 
         </RadioGroup>
+        <TextView
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:paddingLeft="20dp"
+
+            android:text="Search Result: "
+            android:textSize="13dp"
+            />
         <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -118,7 +130,7 @@
 
             <RelativeLayout
                 android:id="@+id/marketCardAus"
-                android:visibility="gone"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -128,6 +140,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     >
+
 
                     <RelativeLayout
                         android:id="@+id/ausTopRow"
@@ -171,10 +184,10 @@
 
                         <TextView
                             android:id="@+id/investmentName"
-                            android:layout_width="match_parent"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="2dp"
-
+                            android:layout_alignParentLeft="true"
                             android:layout_marginEnd="2dp"
                             android:layout_marginBottom="2dp"
                             android:layout_toLeftOf="@+id/investmentChange"

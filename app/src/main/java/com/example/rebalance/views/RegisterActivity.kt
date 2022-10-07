@@ -33,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = Firebase.auth
-        appDatabase = AppDatabase.getDatabase(this)
+//        appDatabase = AppDatabase.getDatabase(this)
 
         binding.registerBtn.setOnClickListener {
             var validRegistration = true

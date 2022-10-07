@@ -48,21 +48,26 @@ class WatchlistAdapter(private val watchlist: List<WatchItem>) : RecyclerView.Ad
             ) {
                 if(response.isSuccessful){
                     Log.d("response", response.body().toString())
-                    println("success")
+
                     var quotes = response.body()?.quoteResult
                     quotes?.let {
-                        println(quotes)
-                        var investment = quotes.result[0]
 
-                        holder.price.text = "$" + investment.price
-                        holder.change.text = investment.oneDayChange.toBigDecimal().round(
-                            MathContext(3, RoundingMode.HALF_UP)
-                        ).toString() + "%"
-                        if(investment.oneDayChange.toDouble() <0){
-                            holder.change.setTextColor(Color.parseColor("#a61111"))
-                        }
-                        if(investment.oneDayChange.toDouble() > 0){
-                            holder.change.setTextColor(Color.parseColor("#489361"))
+                        if(quotes.result.size > 0){
+
+                            var investment = quotes.result[0]
+
+                            holder.price.text = "$" + investment.price
+                            holder.change.text = investment.oneDayChange.toBigDecimal().round(
+                                MathContext(3, RoundingMode.HALF_UP)
+                            ).toString() + "%"
+                            if(investment.oneDayChange.toDouble() <0){
+                                holder.change.setTextColor(Color.parseColor("#a61111"))
+                            }
+                            if(investment.oneDayChange.toDouble() > 0){
+                                holder.change.setTextColor(Color.parseColor("#489361"))
+                            }
+                        } else {
+                            holder.change.text = "Price not found"
                         }
                     }
                 }

@@ -14,7 +14,6 @@ data class WatchItem(
     @ColumnInfo val name:String,
     @ColumnInfo val price: String,
     @ColumnInfo val targetPrice: String,
-
     ):Serializable{
 
 
