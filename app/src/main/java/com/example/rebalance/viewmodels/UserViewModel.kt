@@ -19,6 +19,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     private var _username = MutableLiveData("")
     private var _selectedInvestment = MutableLiveData<Investment>()
 
+
     val id: LiveData<String> = _id
     val username: LiveData<String> = _username
     val selectedInvestment:LiveData<Investment> = _selectedInvestment

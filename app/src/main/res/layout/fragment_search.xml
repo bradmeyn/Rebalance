@@ -126,6 +126,7 @@
             app:cardElevation="3dp"
             android:id="@+id/marketCard"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             >
 
             <RelativeLayout

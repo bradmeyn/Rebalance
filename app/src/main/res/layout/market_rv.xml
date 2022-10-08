@@ -17,31 +17,16 @@
 
         <ImageView
             android:id="@+id/flag"
-            android:layout_marginTop="12dp"
             android:layout_width="63dp"
-            android:layout_height="61dp"
-            android:padding="5dp"
+            android:layout_height="55dp"
+            android:padding="2dp"
             app:srcCompat="@drawable/flag_aus" />
         <!--  TEXT              -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_toRightOf="@+id/flag"
-            >
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="3dp"
-                android:padding="3dp"
-                android:text="closed"
-                android:textSize="10dp"
- />
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/ausTopRow"
@@ -54,13 +39,13 @@
                     android:layout_height="wrap_content"
 
                     android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="2dp"
                     android:layout_marginBottom="2dp"
                     android:layout_toLeftOf="@+id/marketChange"
                     android:padding="3dp"
                     android:text=""
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -73,7 +58,7 @@
                     android:layout_marginRight="3dp"
                     android:padding="3dp"
                     android:text="%"
-                    android:textSize="18dp"
+                    android:textSize="14dp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -85,17 +70,28 @@
 
                 <TextView
                     android:id="@+id/marketName"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
                     android:layout_marginStart="2dp"
-
                     android:layout_marginEnd="2dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_toLeftOf="@+id/marketValue"
+
                     android:padding="3dp"
                     android:text="Australia"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_toRightOf="@+id/marketName"
+                    android:text="closed"
+
+                    android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/marketValue"
@@ -107,8 +103,11 @@
                     android:layout_marginRight="3dp"
                     android:padding="3dp"
                     android:text="1000.00"
-                    android:textSize="18dp" />
+                    android:textSize="14dp" />
+
+
             </RelativeLayout>
+
         </LinearLayout>
 
     </RelativeLayout>

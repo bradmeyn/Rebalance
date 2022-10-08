@@ -35,7 +35,7 @@ class MarketAdapter(private val markets: List<Quote>) : RecyclerView.Adapter<Mar
         } else {
             holder.status.text = "Closed"
         }
-        holder.change.text = market.oneDayChange.toBigDecimal().round(MathContext(3, RoundingMode.HALF_UP)).toString() + "%"
+        holder.change.text = market.oneDayChange.toBigDecimal().round(MathContext(2, RoundingMode.HALF_UP)).toString() + "%"
         if(market.oneDayChange.toDouble() <0){
             holder.change.setTextColor(Color.parseColor("#a61111"))
 

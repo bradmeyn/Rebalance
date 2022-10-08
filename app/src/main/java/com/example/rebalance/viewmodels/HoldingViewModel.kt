@@ -21,6 +21,10 @@ class HoldingViewModel(private val repository: HoldingRepository):ViewModel() {
         repository.insert(holding)
     }
 
+    fun delete(item: Holding) = viewModelScope.launch {
+        repository.delete(item)
+    }
+
 
 
 //       fun calculatePortfolioValues():BigDecimal{

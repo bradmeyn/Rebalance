@@ -11,7 +11,7 @@ import com.example.rebalance.models.WatchItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [User::class, Holding::class, WatchItem::class], version = 11, exportSchema = false)
+@Database(entities = [User::class, Holding::class, WatchItem::class], version = 12, exportSchema = false)
 public abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun holdingDao(): HoldingDao

@@ -21,6 +21,12 @@ class WatchItemRepository(private val watchItemDao: WatchItemDao) {
         watchItemDao.insert(watchItem)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun delete(watchItem: WatchItem) {
+        watchItemDao.delete(watchItem)
+    }
+
 
 
 }

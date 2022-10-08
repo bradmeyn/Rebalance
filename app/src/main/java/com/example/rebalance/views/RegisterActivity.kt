@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import com.example.rebalance.database.AppDatabase
 import com.example.rebalance.Helper.noEmptyInputs
 import com.example.rebalance.models.User
@@ -94,9 +96,18 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+ //        Navigate to about fragment
+        binding.aboutLink.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
     }
 
 
+
+
+
+
+    }
 
     private fun isValidForm():Boolean {
         val inputs = arrayOf<TextInputEditText>(binding.nameInput,binding.emailInput,binding.passwordInput,binding.confirmInput)
@@ -153,8 +164,5 @@ class RegisterActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
     }
-
-
-
 
 }

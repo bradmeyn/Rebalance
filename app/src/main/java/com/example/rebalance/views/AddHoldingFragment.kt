@@ -55,6 +55,9 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
             binding.investmentName.text = investment.name
             binding.investmentCode.text = investment.code
             binding.investmentPrice.text = investment.price
+            binding.unitsInput.setText(investment.units.toString())
+            binding.priceInput.setText(investment.avePrice)
+            binding.targetInput.setText(investment.target)
         }
 
         binding.addHoldingBtn.setOnClickListener {
@@ -102,9 +105,15 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
     private fun validInputs():Boolean{
         var validInputs = true
 
-        validInputs = Helper.isValidPrice(binding.unitsInput)
-        validInputs = Helper.isValidPrice(binding.priceInput)
-        validInputs = Helper.isValidPrice(binding.targetInput)
+       if(!Helper.isValidPrice(binding.unitsInput)){
+           return false
+       }
+       if(!Helper.isValidPrice(binding.priceInput)){
+           return false
+       }
+        if(!Helper.isValidPrice(binding.targetInput)){
+            return false
+        }
 
         return validInputs
     }

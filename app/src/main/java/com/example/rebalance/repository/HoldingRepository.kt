@@ -23,6 +23,12 @@ class HoldingRepository(private val holdingDao: HoldingDao) {
         holdingDao.insert(holding)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun delete(holding: Holding) {
+        holdingDao.delete(holding)
+    }
+
 
 
 }

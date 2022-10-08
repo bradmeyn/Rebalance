@@ -13,6 +13,10 @@ class WatchItemViewModel(private val repository: WatchItemRepository):ViewModel(
         repository.insert(item)
     }
 
+    fun delete(item: WatchItem) = viewModelScope.launch {
+        repository.delete(item)
+    }
+
 }
 
 

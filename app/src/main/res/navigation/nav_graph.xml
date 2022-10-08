@@ -38,7 +38,7 @@
         <action
             android:id="@+id/action_searchFragment_to_addWatchItemFragment"
             app:destination="@id/addWatchItemFragment"
-            app:popUpTo="@id/watchlistFragment"
+            app:popUpTo="@id/searchFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -51,6 +51,11 @@
             app:destination="@id/searchFragment"
             app:popUpTo="@id/portfolioFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_portfolioFragment_to_addHoldingFragment2"
+            app:destination="@id/addHoldingFragment2"
+            app:popUpTo="@id/portfolioFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addHoldingFragment2"
@@ -60,7 +65,7 @@
         <action
             android:id="@+id/action_addHoldingFragment_to_portfolioFragment"
             app:destination="@id/portfolioFragment"
-            app:popUpTo="@id/portfolioFragment"
+            app:popUpTo="@id/searchFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment

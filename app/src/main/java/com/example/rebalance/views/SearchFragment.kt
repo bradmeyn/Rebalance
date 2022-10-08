@@ -80,7 +80,7 @@ class SearchFragment : Fragment() {
 
                 if(quotes.result.size > 0){
                     var investment = quotes.result[0]
-                    binding.marketCardAus.visibility = android.view.View.VISIBLE
+                    binding.marketCard.visibility = android.view.View.VISIBLE
                     binding.investmentName.text= investment.longName.toString()
                     binding.investmentCode.text= investment.symbol
                     binding.investmentPrice.text = "$" + investment.price
@@ -123,11 +123,25 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         binding.portfolioBtn.setOnClickListener{
-            navController!!.navigate(R.id.action_searchFragment_to_addHoldingFragment)
+            if(!this::selectedInvestment.isInitialized){
+                Toast.makeText(
+                    context, "Please search for an investment to add",
+                    Toast.LENGTH_LONG).show()
+            } else {
+                navController!!.navigate(R.id.action_searchFragment_to_addHoldingFragment)
+            }
+
         }
 
-        binding.watchlistBtn.setOnClickListener{
-            navController!!.navigate(R.id.action_searchFragment_to_addWatchItemFragment)
+        binding.watchlistBtn.setOnClickListener {
+            if (!this::selectedInvestment.isInitialized) {
+                Toast.makeText(
+                    context, "Please search for an investment to add",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                navController!!.navigate(R.id.action_searchFragment_to_addWatchItemFragment)
+            }
         }
     }
 

@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 import java.math.BigDecimal
+import java.math.MathContext
+import java.math.RoundingMode
 
 @Entity
 data class Holding(
@@ -43,8 +45,6 @@ data class Holding(
 
         fun isBalanced():Boolean{
             var isBalanced = true
-            println("Current Weight " + currentWeight)
-            println("Target Weight " + targetWeight)
             if((BigDecimal(currentWeight) - BigDecimal(targetWeight)).abs()> BigDecimal(5)){
                 isBalanced = false
             }
@@ -52,6 +52,8 @@ data class Holding(
         }
 
         fun updateWeight(totalBalance: BigDecimal){
-            currentWeight = ((value.toBigDecimal()/totalBalance) * BigDecimal(100)).toString()
+            currentWeight = ((value.toBigDecimal()/totalBalance) * BigDecimal(100)).round(
+                MathContext(3, RoundingMode.HALF_UP)
+            ).toString()
         }
     }

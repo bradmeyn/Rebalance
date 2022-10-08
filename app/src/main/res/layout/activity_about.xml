@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.AboutActivity">
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+
+
+
+        <!-- The primary full-screen view. This can be replaced with whatever view
+             is needed to present your content, e.g. VideoView, SurfaceView,
+             TextureView, etc. -->
+
+
+        <!-- This FrameLayout insets its children based on system windows using
+             android:fitsSystemWindows. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView2"
+
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/rebalance_logo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:text="About Rebalance"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:lineHeight="25dp"
+                android:text="Rebalance is a portfolio and watchlist tracking app made by Brad Meyn for assessment 3 of ITO5046: Mobile and distributed systems "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Resources"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:lineHeight="25dp"
+                android:text="MPAndroidChart by PhilJay"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="30dp"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:lineHeight="25dp"
+                android:text="https://github.com/PhilJay/MPAndroidChart"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:lineHeight="25dp"
+                android:text="Retrofit"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="30dp"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:lineHeight="25dp"
+                android:text="https://square.github.io/retrofit/"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:lineHeight="25dp"
+                android:text="Yahoo Finance API via Rapid API"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="30dp"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:lineHeight="25dp"
+                android:text="https://rapidapi.com/apidojo/api/yahoo-finance1/"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:lineHeight="25dp"
+                android:text="Moshi"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="30dp"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:lineHeight="25dp"
+                android:text="https://github.com/square/moshi"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:lineHeight="25dp"
+                android:text="Firebase (Authentication)"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="30dp"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:lineHeight="25dp"
+                android:text="https://firebase.google.com/"/>
+
+        </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
