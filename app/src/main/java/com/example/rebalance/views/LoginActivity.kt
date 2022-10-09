@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-
         binding.loginBtn.setOnClickListener{
             var email = binding.emailInput.text.toString()
             var password = binding.passwordInput.text.toString()
@@ -100,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //check password format
-        if(binding.passwordInput.text.toString().trim().length > 6){
+        if(binding.passwordInput.text.toString().trim().length < 6){
             binding.passwordInput.setError("Password must be greater than 6 characters")
             validInputs = false
         }
@@ -108,13 +107,6 @@ class LoginActivity : AppCompatActivity() {
         return validInputs
         //check if email exists (firebase) might do this
     }
-
-
-
-
-
-
-
 
 }
 

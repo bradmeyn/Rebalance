@@ -74,7 +74,6 @@ class SearchFragment : Fragment() {
             ) {
                 if(response.isSuccessful){
                     Log.d("response", response.body().toString())
-                    println("success")
                     var quotes = response.body()?.quoteResult
                     quotes?.let {
 
@@ -173,11 +172,5 @@ class SearchFragment : Fragment() {
 
         return validSearch
     }
-
-    fun startAddHolding(){
-
-
-    }
-
 
 }

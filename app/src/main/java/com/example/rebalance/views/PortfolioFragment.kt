@@ -1,51 +1,40 @@
 package com.example.rebalance.views
 
+import android.annotation.SuppressLint
+import android.app.Notification
+
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rebalance.R
 import com.example.rebalance.adapters.HoldingAdapter
-import com.example.rebalance.adapters.MarketAdapter
-import com.example.rebalance.adapters.WatchlistAdapter
-import com.example.rebalance.api.ApiClient
-import com.example.rebalance.api.QuoteResponse
-import com.example.rebalance.viewmodels.UserViewModel
 import com.example.rebalance.databinding.FragmentPortfolioBinding
 import com.example.rebalance.models.Holding
 import com.example.rebalance.models.Investment
-import com.example.rebalance.models.WatchItem
 import com.example.rebalance.viewmodels.HoldingViewModel
+import com.example.rebalance.viewmodels.UserViewModel
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.data.DataSet
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.github.mikephil.charting.utils.ColorTemplate.COLORFUL_COLORS
-import com.github.mikephil.charting.utils.ColorTemplate.VORDIPLOM_COLORS
 import com.google.android.material.snackbar.Snackbar
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.math.BigDecimal
-import java.math.MathContext
-import java.math.RoundingMode
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class PortfolioFragment : Fragment() {
@@ -59,62 +48,71 @@ class PortfolioFragment : Fragment() {
     private val userViewModel: UserViewModel by activityViewModels()
     private lateinit var adapter: HoldingAdapter
     private lateinit var recyclerView:RecyclerView
+    private lateinit var portfolioTotal:BigDecimal
     private lateinit var list: List<Holding>
     lateinit var pieChart: PieChart
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentPortfolioBinding.inflate(inflater, container, false)
-        userViewModel.username.observe(viewLifecycleOwner, { username ->
-            binding.portfolioName.text = username + "'s Portfolio"
-        })
 
+        //set current username to Portfolio
+        userViewModel.username.observe(viewLifecycleOwner) { username ->
+            binding.portfolioName.text = "$username's Portfolio"
+        }
 
-        holdingViewModel.portfolio.observe(viewLifecycleOwner, { portfolio ->
-           if(portfolio.size > 0){
-               list = portfolio
-               var updatedPortfolio = ArrayList<Holding>()
-               var total = BigDecimal(0)
-               for(investment in portfolio){
-                   var investment = updateHoldingValues(investment)
-                   investment.calculateCostbase()
-                   total+= BigDecimal(investment.units) * BigDecimal(investment.curPrice)
-                   updatedPortfolio+=investment
+        holdingViewModel.portfolio.observe(viewLifecycleOwner) { portfolio ->
+            list = portfolio
+            //updating holdings with latest prices
+            holdingViewModel.updateValues()
+            recyclerView = _binding!!.portfolioRecycler
+            if (portfolio.isNotEmpty()) {
+                var total = BigDecimal(0)
+                for (investment in portfolio) {
+                    investment.calculateCostbase()
+                    total += BigDecimal(investment.units) * BigDecimal(investment.curPrice)
+                }
+                object : CountDownTimer(2000, 1000) {
+                    override fun onTick(p0: Long) {
 
-               }
-               var anotherPortfolio = ArrayList<Holding>()
-               object:CountDownTimer(2000, 1000) {
-                   override fun onTick(p0: Long) {
+                    }
 
-                   }
+                    override fun onFinish() {
+                        var investments = ""
+                        for (investment in portfolio) {
+                            investment.updateWeight(total)
 
-                   override fun onFinish() {
-                       for(investment in updatedPortfolio){
-                           investment.updateWeight(total)
-                           anotherPortfolio+=investment
-                           println(investment.currentWeight)
-                           adapter = HoldingAdapter(anotherPortfolio)
-                           recyclerView = _binding!!.portfolioRecycler
-                           var context = activity
-                           recyclerView?.layoutManager = LinearLayoutManager(context)
-                           recyclerView.adapter = adapter
-                           binding.portfolioValue.text = "$" + total.toString()
-                           mIth.attachToRecyclerView(recyclerView)
-                           pieChart = binding.portfolioPieChart
-                           loadPieChart(updatedPortfolio)
-                       }
-                   }
-               }.start()
-           }
+                            if(!investment.isBalanced()){
+                                investments+=investment.code + ", "
+                            }
+                        }
+                        if(investments.isNotEmpty()){
 
-//    }
-        })
+                            Snackbar.make(recyclerView, "The following investments are out of balance: ${investments}", Snackbar.LENGTH_LONG).show()
+                        }
+                        adapter = HoldingAdapter(portfolio)
+
+                        var context = activity
+                        recyclerView?.layoutManager = LinearLayoutManager(context)
+                        recyclerView.adapter = adapter
+                        binding.portfolioValue.text = "$$total"
+                        mIth.attachToRecyclerView(recyclerView)
+                        pieChart = binding.portfolioPieChart
+                        loadPieChart(portfolio)
+                    }
+                }.start()
+            }
+        }
 
 
         return binding.root
@@ -133,53 +131,15 @@ class PortfolioFragment : Fragment() {
         _binding = null
     }
 
-    fun updateHoldingValues(holding: Holding):Holding{
-        val client = ApiClient.apiService.fetchQuotes("AU", holding.code)
-        client.enqueue(object : Callback<QuoteResponse> {
-
-            override fun onResponse(
-                call: Call<QuoteResponse>,
-                response: Response<QuoteResponse>
-            ) {
-                if(response.isSuccessful){
-                    Log.d("response", response.body().toString())
-
-                    var quotes = response.body()?.quoteResult
-                    quotes?.let {
-
-                        if(quotes.result.size > 0){
-
-                            var investment = quotes.result[0]
-
-                            holding.curPrice =  investment.price
-                            holding.value = holding.calculateCurrentValue().toString()
-
-
-                        }
-                    }
-                }
-
-            }
-
-            override fun onFailure(call: Call<QuoteResponse>, t: Throwable) {
-                Log.e("Failure:", ""+t.message)
-            }
-
-
-        })
-        return holding
-    }
-
     fun loadPieChart(portfolio: List<Holding>){
     var pieValues = ArrayList<PieEntry>()
 
-        var count = 0
         for(investment in portfolio){
             pieValues.add(PieEntry(investment.currentWeight.toBigDecimal().toFloat(), investment.code))
         }
 
         var colors = mutableListOf<Int>()
-        for (color in ColorTemplate.MATERIAL_COLORS){
+        for (color in ColorTemplate.JOYFUL_COLORS){
             colors.add(color)
         }
 
@@ -195,7 +155,12 @@ class PortfolioFragment : Fragment() {
         pieChart.setUsePercentValues(true)
         pieChart.legend.textSize = 14f
         pieChart.description.isEnabled = false
-        pieChart.legend.horizontalAlignment
+        pieChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+        pieChart.legend.formSize = 10f
+
+
+
+
     }
 
     var mIth = ItemTouchHelper(
@@ -209,6 +174,10 @@ class PortfolioFragment : Fragment() {
             ): Boolean {
                 return false
             }
+
+
+
+
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 var position = viewHolder.bindingAdapterPosition
@@ -237,6 +206,8 @@ class PortfolioFragment : Fragment() {
                     }
                 }
             }
+
+
         })
 }
 

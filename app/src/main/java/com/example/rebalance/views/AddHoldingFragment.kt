@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -79,6 +80,8 @@ class AddHoldingFragment : Fragment(R.layout.fragment_add_holding) {
 
                 }
                 holdingViewModel.insert(newHolding)
+                Toast.makeText(activity,"${newHolding.code} has been added to your portfolio",
+                    Toast.LENGTH_LONG).show()
                 navController!!.navigate(R.id.action_addHoldingFragment_to_portfolioFragment)
 
             }

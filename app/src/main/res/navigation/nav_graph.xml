@@ -53,9 +53,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_portfolioFragment_to_addHoldingFragment2"
-            app:destination="@id/addHoldingFragment2"
-            app:popUpTo="@id/portfolioFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/addHoldingFragment2" />
     </fragment>
     <fragment
         android:id="@+id/addHoldingFragment2"

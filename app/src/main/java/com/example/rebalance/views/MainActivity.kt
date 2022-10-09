@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -36,23 +35,14 @@ class MainActivity : AppCompatActivity() {
         val myIntent = intent
         val userId = myIntent.getStringExtra("user_id")
         val username = myIntent.getStringExtra("user_name")
-//        args.putString("id",id)
+
         args.putString("userId", username)
         args.putString("username", userId)
-
-//        newHoldingFragment.arguments = args
-//        println("watchlist")
-//        var watchItem2 = WatchItem("VAS.AX", "userID","Vanguard Int", "89.55", "83.00")
-//        watchItemViewModel.insert(watchItem2)
-        println(holdingViewModel.portfolio.value.toString())
-        println(watchItemViewModel.watchlist.value.toString())
-
 
         var navigationBar = binding.mainNavigationBar
         val navController = findNavController(R.id.mainFragment)
         navController.setGraph(R.navigation.nav_graph, args)
         navigationBar.setupWithNavController(navController)
-
 
     }
     }

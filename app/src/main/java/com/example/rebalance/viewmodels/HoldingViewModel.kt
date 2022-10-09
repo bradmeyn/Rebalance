@@ -12,11 +12,6 @@ class HoldingViewModel(private val repository: HoldingRepository):ViewModel() {
 
     val portfolio: LiveData<List<Holding>> = repository.portfolio
 
-//    val _portfolio: MutableLiveData<Holding> = portfolio
-//    lateinit var portfolioTotal: MutableLiveData<BigDecimal>
-
-
-
     fun insert(holding: Holding) = viewModelScope.launch {
         repository.insert(holding)
     }
@@ -25,16 +20,17 @@ class HoldingViewModel(private val repository: HoldingRepository):ViewModel() {
         repository.delete(item)
     }
 
+    fun updateValues(){
+        repository.updateValues()
+    }
 
+    fun updateValues(total:BigDecimal){
+        repository.updateWeights(total)
+    }
 
-//       fun calculatePortfolioValues():BigDecimal{
-//           var total = BigDecimal(0)
-//        for (investment in portfolio.value!!){
-//            total+= BigDecimal(investment.units) * BigDecimal(investment.curPrice)
-//        }
-//           return total
-//    }
-
+    fun getPortfolioTotal():BigDecimal{
+        return repository.getPortfolioTotal()
+    }
 }
 
 

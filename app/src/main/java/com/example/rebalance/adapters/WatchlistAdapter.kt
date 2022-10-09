@@ -32,10 +32,7 @@ class WatchlistAdapter(private val watchlist: List<WatchItem>) : RecyclerView.Ad
 
         val currentItem = watchlist[position]
 
-
         holder.code.text = currentItem.code
-//        holder.price.text = "$"+ currentItem.price
-//        holder.change.text =
         holder.name.text = currentItem.name
         holder.target.text = "Target: $" + currentItem.targetPrice
 

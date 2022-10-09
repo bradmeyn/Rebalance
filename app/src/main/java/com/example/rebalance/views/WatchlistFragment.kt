@@ -49,9 +49,6 @@ class WatchlistFragment : Fragment() {
 
         userViewModel.id.observe(viewLifecycleOwner, { id ->
             userId = id
-            println("USERID")
-            println(userId)
-
         })
 
         _binding = FragmentWatchlistBinding.inflate(inflater, container, false)
@@ -108,7 +105,7 @@ class WatchlistFragment : Fragment() {
 
                     when(direction){
                         ItemTouchHelper.RIGHT -> {
-                            println("you are swiping")
+
                             var deletedItem = list.get(position)
                             watchItemViewModel.delete(deletedItem)
                             adapter.notifyItemRemoved(position)

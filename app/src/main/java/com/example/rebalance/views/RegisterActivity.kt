@@ -135,7 +135,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         //check password format
-        if(binding.passwordInput.text.toString().trim().length > 6){
+        if(binding.passwordInput.text.toString().trim().length < 6){
             binding.passwordInput.setError("Password must be greater than 6 characters")
             validInputs = false
         }
@@ -154,9 +154,9 @@ class RegisterActivity : AppCompatActivity() {
     private fun createUser(id: String, name: String){
 
         val newUser = User(id, name)
-        GlobalScope.launch(Dispatchers.IO){
-            appDatabase.userDao().addUser(newUser)
-        }
+//        GlobalScope.launch(Dispatchers.IO){
+//            appDatabase.userDao().addUser(newUser)
+//        }
 
         Toast.makeText(
             this@RegisterActivity,
